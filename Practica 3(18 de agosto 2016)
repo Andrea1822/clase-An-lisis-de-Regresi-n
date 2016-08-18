@@ -1,0 +1,70 @@
+####PRACTICA 3#####
+
+
+rm(list=ls())  ####limpiar el entorno de trabajo.
+install.packages("foreing")
+require(foreing)##libreria
+setwd("C://Users//SALA-C8//Desktop//")
+C:\Users\SALA-C8\Desktop\A
+C://Users//SALA-C8//Desktop
+SDEMT215 <- data.frame(read.dbf("sociodem.dbf"))
+####para borrar rm(_____)
+View(sociodem)
+
+
+
+#####Recodificar####
+#4.1 Recodificacion de variables numericas (rangos)
+#Metodo 1
+sociodem$EDAD11[as.numeric(sociodem$EDA)>=0 & as.numeric(sociodem$EDA)<=10]<-1
+sociodem$EDAD11[as.numeric(sociodem$EDA)>=11 & as.numeric(sociodem$EDA)<=20]<-2
+sociodem$EDAD11[as.numeric(sociodem$EDA)>=21 & as.numeric(sociodem$EDA)<=30]<-3
+sociodem$EDAD11[as.numeric(sociodem$EDA)>=31 & as.numeric(sociodem$EDA)<=40]<-4
+sociodem$EDAD11[as.numeric(sociodem$EDA)>=41]<-5
+ls(sociodem) ##LISTA DE VARIABLES
+table(sociodem$EDAD11)
+
+class(sociodem$ENT)
+
+sociodem$ENT <- (as.character(as.numeric(SDEMT215$ENT)))
+
+
+
+#Metodo 2
+SDEMT215$EDAD111 <- ifelse(as.numeric(sociodem$EDA)<=0 & as.numeric(sociodem$EDA)<=10,1)
+                       ifelse(as.numeric(sociodem$EDA)>=11 & as.numeric(sociodem$EDA)20,2)
+                       ifelse(as.numeric(sociodem$EDA)>=21 & as.numeric(sociodem$EDA)30,3)
+                       ifelse(as.numeric(sociodem$EDA)>=31 & as.numeric(sociodem$EDA)40,4,5)
+                       
+table(sociodem$EDAD111)
+
+
+
+#4.1 Recodificacion de variables tipo caracter
+class(sociodem&R_DEF)
+
+sociodem$VALIDO[as.character(sociodem$R_DEF)=="00"]<- "Entrevista completa"
+sociodem$VALIDO[as.character(sociodem$R_DEF)!="00"]<- "Entrevista incompleta"
+
+wtd.table(sociodem$VALIDO )
+
+
+
+#5.1 Seleccionando variables de interes
+#Metodo 1
+var<- c("R_DEF","LOC","MUN","C_RES")
+newdata1<- sociodem[ ,var]  
+###########los renglones iguales y solo seleccione las variables pre-escritas####
+
+
+
+#####Seleccionar casos u observaciones
+####Funcionn...subset()
+
+help(subset)
+
+mujer<- subset(sociodem,sociodem$SEX == 2)
+table(mujer$SEX)
+mujer$CD_A <- as.character(mujer$CD_A)
+mujer1<- subset(mujer, mujer$CD_A == "02" | mujer$CD_A== "16")
+table(mujer1$CD_A)
