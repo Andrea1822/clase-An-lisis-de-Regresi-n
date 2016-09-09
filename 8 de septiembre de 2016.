@@ -23,9 +23,9 @@ anova(modl)
 # y se puede establecer un modelo 
 
 ##revisar r al cuadrado
-#al rededor del 91% de la variabilidad de la estura es explicada por la recta ajustada 
+#al rededor del 91% de la variabilidad de la estura es explicada por la recta ajust
 
-#######################supuestos#############################
+######supuestos########
 base1<-data.frame(eco,esta)
 base1$fitted.modl<-fitted(modl)
 base1$residuals.modl<-residuals(modl)
